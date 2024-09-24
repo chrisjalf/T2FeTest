@@ -17,6 +17,7 @@ export default {};
 #header-text {
   text-align: center;
   color: $text-black;
+  margin-top: 3.4375rem;
 
   h1 {
     font-style: normal;

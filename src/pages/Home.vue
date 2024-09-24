@@ -11,6 +11,16 @@
         <i class="fa fa-search"></i>
       </button>
     </div>
+    <section class="categories">
+      <div class="category-card">
+        <i class="fa fa-3x fa-play"></i>
+        <h3 class="category-header">Getting Started</h3>
+        <div class="category-footer">
+          <p class="category-articles">5 articles</p>
+          <p class="category-last-updated">Last updated 2 days ago</p>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -26,18 +36,17 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  padding: 3.4375rem 0 4.6875rem 0;
+  $primary-color: #03a84e;
 
   .search-form {
     $search-form-width: 720px;
     $search-form-radius: 4px;
     $search-button-width: 80px;
     $search-button-height: 60px;
-    $search-button-color: #03a84e;
 
     max-width: $search-form-width;
     height: auto;
-    margin: 2.1875rem auto 0 auto;
+    margin: 2.1875rem auto 4.6875rem auto;
 
     .search-input {
       float: left;
@@ -60,9 +69,9 @@ export default {
       width: $search-button-width;
       height: $search-button-height;
       padding: 1.25rem 1.875rem;
-      background-color: $search-button-color;
+      background-color: $primary-color;
       color: white;
-      border: 1px solid $search-button-color;
+      border: 1px solid $primary-color;
       border-left: none;
       border-top-right-radius: $search-form-radius;
       border-bottom-right-radius: $search-form-radius;
@@ -74,6 +83,46 @@ export default {
 
       &:hover {
         background: #039545;
+      }
+    }
+  }
+
+  .categories {
+    width: 100%;
+    background-color: #fafafa;
+    padding: 3.75rem 0 6.25rem 0;
+
+    .category-card {
+      width: 315px;
+      margin: 0 auto;
+
+      padding: 2.25rem 0;
+      background-color: #ffffff;
+      border: 1px solid #eeeeee;
+      border-radius: 5px;
+      text-align: center;
+
+      .fa-play {
+        color: $primary-color;
+      }
+
+      .category-header {
+        font-size: 20px;
+        margin-top: 1.25rem;
+      }
+
+      .category-footer {
+        margin-top: 1.25rem;
+
+        .category-articles {
+          font-size: 13px;
+          color: $primary-color;
+        }
+
+        .category-last-updated {
+          font-size: 11px;
+          color: #9c9aa6;
+        }
       }
     }
   }
