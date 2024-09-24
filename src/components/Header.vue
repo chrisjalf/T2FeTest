@@ -1,8 +1,8 @@
 <template>
   <div id="header-wrapper">
     <div id="header-text">
-      <h1>Knowledge base doesn't have to be boring</h1>
-      <h3>Everything you need to manage your messaging</h3>
+      <h1>Knowledge base doesn’t have to be boring</h1>
+      <h3>Everything you need to Manage your Messaging</h3>
     </div>
   </div>
 </template>
@@ -16,9 +16,7 @@ export default {};
 
 #header-text {
   text-align: center;
-  font-family: $font-family;
   color: $text-black;
-  padding: 20px;
 
   h1 {
     font-style: normal;
@@ -32,6 +30,7 @@ export default {};
     font-weight: normal;
     font-size: 20px;
     line-height: 24px;
+    margin-top: 0.625rem;
   }
 }
 </style>
