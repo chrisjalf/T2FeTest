@@ -32,7 +32,7 @@ export default {
   $search-button-height: 60px;
   $search-button-color: #03a84e;
 
-  width: $search-form-width;
+  max-width: $search-form-width;
   height: auto;
   margin: 0 auto;
 
