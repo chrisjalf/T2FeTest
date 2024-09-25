@@ -14,7 +14,9 @@
             <span class="category-articles">
               {{ category.totalArticle }} articles
             </span>
-            <span class="category-last-updated">Last updated 2 days ago</span>
+            <span class="category-last-updated">
+              {{ formatLastUpdatedDate(category.updatedOn) }}
+            </span>
           </div>
         </router-link>
       </div>
@@ -28,6 +30,7 @@
 
 <script>
 import * as api from "../api";
+import * as dateFormatter from "../date";
 
 export default {
   data() {
@@ -48,6 +51,11 @@ export default {
           // sort categories ascendingly
           .sort((a, b) => a.order - b.order)
       );
+    },
+
+    //formatters
+    formatLastUpdatedDate(date) {
+      return `Last update ${dateFormatter.elapsedDuration(date)} ago`;
     },
   },
   created() {
