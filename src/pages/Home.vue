@@ -12,12 +12,14 @@
       </button>
     </div>
     <section class="categories">
-      <div class="category-card">
-        <i class="fa fa-3x fa-play"></i>
-        <h3 class="category-header">Getting Started</h3>
-        <div class="category-footer">
-          <p class="category-articles">5 articles</p>
-          <p class="category-last-updated">Last updated 2 days ago</p>
+      <div class="categories-container">
+        <div class="category-card" v-for="n in 6" :key="n">
+          <i class="fa fa-3x fa-play"></i>
+          <h3 class="category-header">Getting Started</h3>
+          <div class="category-footer">
+            <span class="category-articles">5 articles</span>
+            <span class="category-last-updated">Last updated 2 days ago</span>
+          </div>
         </div>
       </div>
     </section>
@@ -88,40 +90,55 @@ export default {
   }
 
   .categories {
-    width: 100%;
+    $category-container-gap: 1.25rem;
+    $category-card-width: 315px;
+
     background-color: #fafafa;
     padding: 3.75rem 0 6.25rem 0;
 
-    .category-card {
-      width: 315px;
+    .categories-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: $category-container-gap;
+      max-width: calc(
+        (#{$category-card-width} * 3) + (#{$category-container-gap} * 2)
+      );
       margin: 0 auto;
 
-      padding: 2.25rem 0;
-      background-color: #ffffff;
-      border: 1px solid #eeeeee;
-      border-radius: 5px;
-      text-align: center;
+      .category-card {
+        width: $category-card-width;
+        padding: 2.25rem 0;
+        background-color: #ffffff;
+        border: 1px solid #eeeeee;
+        border-radius: 5px;
+        text-align: center;
 
-      .fa-play {
-        color: $primary-color;
-      }
-
-      .category-header {
-        font-size: 20px;
-        margin-top: 1.25rem;
-      }
-
-      .category-footer {
-        margin-top: 1.25rem;
-
-        .category-articles {
-          font-size: 13px;
+        .fa-play {
           color: $primary-color;
         }
 
-        .category-last-updated {
-          font-size: 11px;
-          color: #9c9aa6;
+        .category-header {
+          font-size: 20px;
+          margin-top: 1.25rem;
+        }
+
+        .category-footer {
+          margin-top: 1.25rem;
+
+          & > * {
+            display: block;
+          }
+
+          .category-articles {
+            font-size: 13px;
+            color: $primary-color;
+          }
+
+          .category-last-updated {
+            font-size: 11px;
+            color: #9c9aa6;
+          }
         }
       }
     }
