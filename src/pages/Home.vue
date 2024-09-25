@@ -13,10 +13,11 @@
     </div>
     <section class="categories">
       <div class="categories-container">
-        <div
+        <router-link
           class="category-card"
           v-for="category in categories"
           :key="category.id"
+          to="/"
         >
           <i class="fa fa-3x" :class="`fa-${category.icon}`">&nbsp;</i>
           <h3 class="category-header">{{ category.title }}</h3>
@@ -26,7 +27,7 @@
             </span>
             <span class="category-last-updated">Last updated 2 days ago</span>
           </div>
-        </div>
+        </router-link>
       </div>
       <div class="categories-empty" v-if="categories.length === 0">
         <h2>Oh no it's empty!</h2>
