@@ -1,16 +1,5 @@
 <template>
   <div class="home">
-    <tawk-header></tawk-header>
-    <div class="search-form">
-      <input
-        type="text"
-        placeholder="Search for answers"
-        class="search-input"
-      />
-      <button type="submit" class="search-submit">
-        <i class="fa fa-search"></i>
-      </button>
-    </div>
     <section class="categories">
       <div class="categories-container">
         <router-link
@@ -38,14 +27,9 @@
 </template>
 
 <script>
-import Header from "../components/Header.vue";
-
 import * as api from "../api";
 
 export default {
-  components: {
-    "tawk-header": Header,
-  },
   data() {
     return {
       categories: [],
@@ -71,58 +55,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../scss/_variables.scss";
+
 .home {
-  $primary-color: #03a84e;
-
-  .search-form {
-    $search-form-width: 720px;
-    $search-form-radius: 4px;
-    $search-button-width: 80px;
-    $search-button-height: 60px;
-
-    max-width: $search-form-width;
-    height: auto;
-    margin: 2.1875rem auto 4.6875rem auto;
-
-    .search-input {
-      float: left;
-      width: calc(100% - #{$search-button-width});
-      height: 100%;
-      padding: 1.25rem;
-      font-size: 1rem;
-      border: 1px solid #eeeeee;
-      border-top-left-radius: $search-form-radius;
-      border-bottom-left-radius: $search-form-radius;
-
-      &::placeholder,
-      &::-moz-placeholder,
-      &::-webkit-input-placeholder {
-        color: #9c9aa6;
-      }
-    }
-
-    .search-submit {
-      width: $search-button-width;
-      height: $search-button-height;
-      padding: 1.25rem 1.875rem;
-      background-color: $primary-color;
-      color: white;
-      border: 1px solid $primary-color;
-      border-left: none;
-      border-top-right-radius: $search-form-radius;
-      border-bottom-right-radius: $search-form-radius;
-      cursor: pointer;
-
-      .fa-search {
-        font-size: 18px;
-      }
-
-      &:hover {
-        background: #039545;
-      }
-    }
-  }
-
   .categories {
     $category-container-gap: 1.25rem;
     $category-card-width: 315px;
@@ -149,7 +84,7 @@ export default {
         border-radius: 5px;
 
         .fa {
-          color: $primary-color;
+          color: $green;
         }
 
         .category-header {
@@ -166,7 +101,7 @@ export default {
 
           .category-articles {
             font-size: 13px;
-            color: $primary-color;
+            color: $green;
           }
 
           .category-last-updated {
