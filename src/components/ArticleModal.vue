@@ -8,7 +8,7 @@
           <h2 class="article-title">
             {{ article.title }}
           </h2>
-          <span class="article-author" v-if="author.name">
+          <span class="article-author" v-if="author && author.name">
             {{ author.name }}
           </span>
           <p class="article-content">{{ article.content }}</p>
@@ -22,7 +22,6 @@
 import Teleport from "vue2-teleport";
 
 import * as api from "../api";
-import * as dateFormatter from "../date";
 
 export default {
   props: ["visible", "article"],
@@ -47,14 +46,15 @@ export default {
     //toggles
     toggleArticle() {
       this.$emit("toggle");
-    },
-    //formatters
-    formatLastUpdatedDate(date) {
-      return `Updated ${dateFormatter.elapsedDuration(date)} ago`;
+      this.changeAuthor({});
     },
   },
-  updated() {
-    if (this.visible) this.getAuthor();
+  watch: {
+    visible(newVal) {
+      if (newVal === true) {
+        this.getAuthor();
+      }
+    },
   },
 };
 </script>
