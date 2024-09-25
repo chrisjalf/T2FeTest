@@ -1,14 +1,14 @@
 <template>
   <div class="home">
-    <section class="categories">
+    <div class="categories">
       <div class="categories-container">
         <router-link
           class="category-card"
           v-for="category in categories"
           :key="category.id"
-          to="/"
+          :to="`/category/${category.id}`"
         >
-          <i class="fa fa-3x" :class="`fa-${category.icon}`">&nbsp;</i>
+          <i class="fa fa-3x" :class="`fa-${category.icon}`"></i>
           <h3 class="category-header">{{ category.title }}</h3>
           <div class="category-footer">
             <span class="category-articles">
@@ -24,7 +24,7 @@
         <h2>Oh no it's empty!</h2>
         <p>There's nothing in the category list</p>
       </div>
-    </section>
+    </div>
   </div>
 </template>
 
