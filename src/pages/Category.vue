@@ -4,20 +4,21 @@
       <div class="breadcrumb">
         <router-link class="breadcrumb-prev" to="/">All categories</router-link>
         <i class="fa fa-chevron-right"></i>
-        <span class="breadcrumb-curr">Getting started</span>
+        <span class="breadcrumb-curr">{{ category.title }}</span>
       </div>
       <div class="category-content">
         <div class="category-card">
           <div class="category-card-top">
-            <i class="fa fa-3x fa-play"></i>
-            <span class="category-title">Getting started</span>
-            <span class="category-last-updated">Updated 2 weeks ago</span>
+            <i class="fa fa-3x" :class="`fa-${category.icon}`"></i>
+            <span class="category-title">{{ category.title }}</span>
+            <span class="category-last-updated">
+              {{ formatLastUpdatedDate(category.updatedOn) }}
+            </span>
           </div>
           <div class="category-card-bottom">
             <i class="fa fa-lg fa-info-circle"></i>
             <p class="category-desc">
-              De quibus cupio scire quid sentias. Quid, de quo nulla dissensio
-              est Illum mallem levares sentias nulla dissensio.
+              {{ category.description }}
             </p>
           </div>
         </div>
@@ -67,7 +68,9 @@ export default {
     },
     async getArticles() {
       const articles = await api.articles(this.id);
-      this.changeArticles(articles);
+      this.changeArticles(
+        articles.filter((article) => article.status === "published")
+      );
     },
     async getCategories() {
       const categories = await api.categories();
@@ -205,6 +208,8 @@ export default {
           border-radius: 4px;
           padding: 1.25rem 2.5rem;
           margin-bottom: 1.125rem;
+          cursor: pointer;
+          transition: border-color 0.5s ease;
 
           &:last-child {
             margin-bottom: 0;
@@ -234,6 +239,10 @@ export default {
 
           & > :last-child {
             margin-left: auto;
+          }
+
+          &:hover {
+            border-color: $green;
           }
         }
       }
