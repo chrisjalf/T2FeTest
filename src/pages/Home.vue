@@ -43,7 +43,9 @@ export default {
       const categories = await api.categories();
       this.changeCategories(
         categories
+          // select enabled categories
           .filter((category) => category.enabled)
+          // sort categories ascendingly
           .sort((a, b) => a.order - b.order)
       );
     },
