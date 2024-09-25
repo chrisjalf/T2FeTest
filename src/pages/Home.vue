@@ -13,14 +13,24 @@
     </div>
     <section class="categories">
       <div class="categories-container">
-        <div class="category-card" v-for="n in 6" :key="n">
-          <i class="fa fa-3x fa-play"></i>
-          <h3 class="category-header">Getting Started</h3>
+        <div
+          class="category-card"
+          v-for="category in categories"
+          :key="category.id"
+        >
+          <i class="fa fa-3x" :class="`fa-${category.icon}`">&nbsp;</i>
+          <h3 class="category-header">{{ category.title }}</h3>
           <div class="category-footer">
-            <span class="category-articles">5 articles</span>
+            <span class="category-articles">
+              {{ category.totalArticle }} articles
+            </span>
             <span class="category-last-updated">Last updated 2 days ago</span>
           </div>
         </div>
+      </div>
+      <div class="categories-empty" v-if="categories.length === 0">
+        <h2>Oh no it's empty!</h2>
+        <p>There's nothing in the category list</p>
       </div>
     </section>
   </div>
@@ -29,9 +39,32 @@
 <script>
 import Header from "../components/Header.vue";
 
+import * as api from "../api";
+
 export default {
   components: {
     "tawk-header": Header,
+  },
+  data() {
+    return {
+      categories: [],
+    };
+  },
+  methods: {
+    changeCategories(categories) {
+      this.categories = categories;
+    },
+    async getCategories() {
+      const categories = await api.categories();
+      this.changeCategories(
+        categories
+          .filter((category) => category.enabled)
+          .sort((a, b) => a.order - b.order)
+      );
+    },
+  },
+  created() {
+    this.getCategories();
   },
 };
 </script>
@@ -95,6 +128,7 @@ export default {
 
     background-color: #fafafa;
     padding: 3.75rem 0 6.25rem 0;
+    text-align: center;
 
     .categories-container {
       display: flex;
@@ -112,9 +146,8 @@ export default {
         background-color: #ffffff;
         border: 1px solid #eeeeee;
         border-radius: 5px;
-        text-align: center;
 
-        .fa-play {
+        .fa {
           color: $primary-color;
         }
 
