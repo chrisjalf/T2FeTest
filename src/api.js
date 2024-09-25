@@ -21,3 +21,13 @@ export const articles = async (id) => {
     return [];
   }
 };
+
+export const author = async (id) => {
+  const url = `${apiBaseUrl}/author/${id}`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch {
+    return [];
+  }
+};

@@ -31,8 +31,9 @@
             class="category-article"
             v-for="article in articles"
             :key="article.id"
+            @click="toggleArticle(article)"
           >
-            <i class="fa fa-lg fa-file-alt"></i>
+            <i class="fa fa-lg" :class="`fa-${article.icon}`"></i>
             <div class="article-desc">
               <span class="article-title">{{ article.title }}</span>
               <span class="article-last-updated">
@@ -44,19 +45,31 @@
         </div>
       </div>
     </div>
+    <article-modal
+      :visible="articleModalVisible"
+      :article="selectedArticle"
+      @toggle="toggleArticle()"
+    />
   </div>
 </template>
 
 <script>
+import ArticleModal from "../components/ArticleModal.vue";
+
 import * as api from "../api";
 import * as dateFormatter from "../date";
 
 export default {
   props: ["id"],
+  components: {
+    ArticleModal,
+  },
   data() {
     return {
       category: {},
       articles: [],
+      selectedArticle: {},
+      articleModalVisible: false,
     };
   },
   methods: {
@@ -65,6 +78,9 @@ export default {
     },
     changeArticles(articles) {
       this.articles = articles;
+    },
+    changeSelectedArticle(article) {
+      this.selectedArticle = article;
     },
     async getArticles() {
       const articles = await api.articles(this.id);
@@ -81,6 +97,12 @@ export default {
       );
     },
 
+    //toggles
+    toggleArticle(article = {}) {
+      this.changeSelectedArticle(article);
+      this.articleModalVisible =
+        Object.entries(this.selectedArticle).length !== 0;
+    },
     //formatters
     formatLastUpdatedDate(date) {
       return `Updated ${dateFormatter.elapsedDuration(date)} ago`;
