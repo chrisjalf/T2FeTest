@@ -21,6 +21,16 @@
             </p>
           </div>
         </div>
+        <div class="category-articles">
+          <div class="category-article" v-for="category in 5" :key="category">
+            <i class="fa fa-lg fa-file-alt"></i>
+            <div class="article-desc">
+              <span class="article-title">Creating a New Account</span>
+              <span class="article-last-updated">Updated Jun, 15 2019</span>
+            </div>
+            <i class="fa fa-lg fa-chevron-right"></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -73,6 +83,7 @@ export default {
     }
 
     .category-content {
+      display: flex;
       margin-top: 1.375rem;
       text-align: center;
 
@@ -82,6 +93,7 @@ export default {
         border: 1px solid #eeeeee;
         border-radius: 4px;
         padding: 2.5rem 0 3.125rem;
+        align-self: flex-start;
 
         .category-card-top {
           & > * {
@@ -119,6 +131,52 @@ export default {
             color: #9c9aa6;
             font-weight: 400;
             margin: 0.875rem 1.875rem 0;
+          }
+        }
+      }
+
+      .category-articles {
+        width: 100%;
+        margin-left: 3.75rem;
+
+        .category-article {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          background-color: #ffffff;
+          border: 1px solid #eeeeee;
+          border-radius: 4px;
+          padding: 1.25rem 2.5rem;
+          margin-bottom: 1.125rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          .article-desc {
+            margin-left: 1.5rem;
+
+            & > * {
+              display: block;
+              text-align: left;
+            }
+
+            .article-title {
+              font-size: 20px;
+              color: #373737;
+              font-weight: 400;
+            }
+
+            .article-last-updated {
+              font-size: 11px;
+              color: #9c9aa6;
+              font-weight: 400;
+              margin-top: 0.5rem;
+            }
+          }
+
+          & > :last-child {
+            margin-left: auto;
           }
         }
       }
