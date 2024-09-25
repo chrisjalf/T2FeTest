@@ -136,8 +136,9 @@ export default {
       }
 
       .category-articles {
-        width: 100%;
+        flex-grow: 1;
         margin-left: 3.75rem;
+        align-self: flex-start;
 
         .category-article {
           display: flex;
@@ -179,6 +180,22 @@ export default {
             margin-left: auto;
           }
         }
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .category-content {
+      flex-direction: column;
+
+      .category-card {
+        width: 100% !important;
+      }
+
+      .category-articles {
+        margin-left: 0 !important;
+        margin-top: 1.8rem;
+        width: 100%;
       }
     }
   }
