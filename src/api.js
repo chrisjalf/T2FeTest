@@ -11,3 +11,13 @@ export const categories = async () => {
     return [];
   }
 };
+
+export const articles = async (id) => {
+  const url = `${apiBaseUrl}/category/${id}`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch {
+    return [];
+  }
+};

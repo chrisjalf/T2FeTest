@@ -21,12 +21,22 @@
             </p>
           </div>
         </div>
-        <div class="category-articles">
-          <div class="category-article" v-for="category in 5" :key="category">
+        <div class="articles-empty" v-if="articles.length === 0">
+          <h2>Oh no it's empty!</h2>
+          <p>There's no article for this category</p>
+        </div>
+        <div class="category-articles" v-else>
+          <div
+            class="category-article"
+            v-for="article in articles"
+            :key="article.id"
+          >
             <i class="fa fa-lg fa-file-alt"></i>
             <div class="article-desc">
-              <span class="article-title">Creating a New Account</span>
-              <span class="article-last-updated">Updated Jun, 15 2019</span>
+              <span class="article-title">{{ article.title }}</span>
+              <span class="article-last-updated">
+                {{ formatLastUpdatedDate(article.updatedOn) }}
+              </span>
             </div>
             <i class="fa fa-lg fa-chevron-right"></i>
           </div>
@@ -37,8 +47,49 @@
 </template>
 
 <script>
+import * as api from "../api";
+import * as dateFormatter from "../date";
+
 export default {
   props: ["id"],
+  data() {
+    return {
+      category: {},
+      articles: [],
+    };
+  },
+  methods: {
+    changeCategory(category) {
+      this.category = category;
+    },
+    changeArticles(articles) {
+      this.articles = articles;
+    },
+    async getArticles() {
+      const articles = await api.articles(this.id);
+      this.changeArticles(articles);
+    },
+    async getCategories() {
+      const categories = await api.categories();
+      this.changeCategory(
+        categories.find(
+          (category) => category.id === this.id && category.enabled
+        ) || {}
+      );
+    },
+
+    //formatters
+    formatLastUpdatedDate(date) {
+      return `Updated ${dateFormatter.elapsedDuration(date)} ago`;
+    },
+  },
+  async created() {
+    await this.getCategories();
+
+    if (Object.entries(this.category).length === 0) this.$router.push("/");
+
+    this.getArticles();
+  },
 };
 </script>
 
@@ -135,6 +186,11 @@ export default {
         }
       }
 
+      .articles-empty {
+        flex-grow: 1;
+        align-self: center;
+      }
+
       .category-articles {
         flex-grow: 1;
         margin-left: 3.75rem;
@@ -190,6 +246,10 @@ export default {
 
       .category-card {
         width: 100% !important;
+      }
+
+      .articles-empty {
+        margin-top: 1.8rem;
       }
 
       .category-articles {
