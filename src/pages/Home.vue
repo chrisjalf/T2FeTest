@@ -84,6 +84,7 @@ export default {
         background-color: #ffffff;
         border: 1px solid #eeeeee;
         border-radius: 5px;
+        transition: transform 0.5s ease;
 
         .fa {
           color: $green;
@@ -110,6 +111,11 @@ export default {
             font-size: 11px;
             color: #9c9aa6;
           }
+        }
+
+        &:hover {
+          transform: translateY(-5px);
+          border-color: $green;
         }
       }
     }
