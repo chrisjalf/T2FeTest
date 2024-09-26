@@ -8,7 +8,7 @@ export const categories = async () => {
     const response = await axios.get(url);
     return response.data;
   } catch (err) {
-    console.log(err);
+    console.log(`categories err: ${err}`);
     return [];
   }
 };
@@ -19,7 +19,7 @@ export const articles = async (id) => {
     const response = await axios.get(url);
     return response.data;
   } catch (err) {
-    console.log(err);
+    console.log(`articles err: ${err}`);
     return [];
   }
 };
@@ -30,7 +30,7 @@ export const author = async (id) => {
     const response = await axios.get(url);
     return response.data;
   } catch (err) {
-    console.log(err);
+    console.log(`author err: ${err}`);
     return [];
   }
 };
