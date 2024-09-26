@@ -7,7 +7,8 @@ export const categories = async () => {
   try {
     const response = await axios.get(url);
     return response.data;
-  } catch {
+  } catch (err) {
+    console.log(err);
     return [];
   }
 };
@@ -17,7 +18,8 @@ export const articles = async (id) => {
   try {
     const response = await axios.get(url);
     return response.data;
-  } catch {
+  } catch (err) {
+    console.log(err);
     return [];
   }
 };
@@ -27,7 +29,8 @@ export const author = async (id) => {
   try {
     const response = await axios.get(url);
     return response.data;
-  } catch {
+  } catch (err) {
+    console.log(err);
     return [];
   }
 };
