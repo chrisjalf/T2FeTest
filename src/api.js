@@ -34,3 +34,14 @@ export const author = async (id) => {
     return [];
   }
 };
+
+export const search = async (query) => {
+  const url = `${apiBaseUrl}/search/${query}`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (err) {
+    console.log(`search err: ${err}`);
+    return [];
+  }
+};
