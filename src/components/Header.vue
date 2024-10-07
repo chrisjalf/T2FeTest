@@ -9,6 +9,7 @@
         type="text"
         placeholder="Search for answers"
         class="search-input"
+        v-model="keyword"
         @keydown.enter="performSearch"
       />
       <button type="submit" class="search-submit" @click="performSearch">
@@ -27,7 +28,12 @@ export default {
   },
   methods: {
     performSearch() {
-      console.log("performSearch");
+      if (this.keyword !== "") {
+        this.$router.push({
+          path: "/articles",
+          query: { search: this.keyword },
+        });
+      }
     },
   },
 };
