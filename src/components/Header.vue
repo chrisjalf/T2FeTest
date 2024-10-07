@@ -9,8 +9,9 @@
         type="text"
         placeholder="Search for answers"
         class="search-input"
+        @keydown.enter="performSearch"
       />
-      <button type="submit" class="search-submit">
+      <button type="submit" class="search-submit" @click="performSearch">
         <i class="fa fa-search"></i>
       </button>
     </div>
@@ -18,7 +19,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      keyword: "",
+    };
+  },
+  methods: {
+    performSearch() {
+      console.log("performSearch");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
